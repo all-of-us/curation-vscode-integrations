@@ -1,0 +1,92 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "docker-run",
+      "label": "docker-run: debug",
+      "dependsOn": [
+        "docker-build"
+      ],
+      "python": {
+        // Define your entrypoint here
+        // NOTE: this is a path within the container.
+        // It must start with /home/curation/project/curation/
+        "file": "/home/curation/project/curation/data_steward/main.py",
+      },
+      "dockerRun": {
+        "containerName": "curation-dev",
+        "volumes": [
+          {
+            "localPath": "${workspaceFolder}/.git",
+            "containerPath": "/home/curation/project/curation/.git",
+            "permissions": "rw"
+          },
+          {
+            "localPath": "${workspaceFolder}/data_steward",
+            "containerPath": "/home/curation/project/curation/data_steward",
+            "permissions": "rw"
+          },
+          {
+            "localPath": "${workspaceFolder}/tests",
+            "containerPath": "/home/curation/project/curation/tests",
+            "permissions": "rw"
+          },
+          {
+            "localPath": "${workspaceFolder}/tools",
+            "containerPath": "/home/curation/project/curation/tools",
+            "permissions": "rw"
+          },
+          {
+            "localPath": "${workspaceFolder}/.circleci",
+            "containerPath": "/home/curation/project/curation/.circleci",
+            "permissions": "rw"
+          },
+          {
+            "localPath": "${GOOGLE_APPLICATION_CREDENTIALS}",
+            "containerPath": "/home/curation/project/curation/aou-res-curation-test.json"
+          }
+        ],
+        "env": {
+          // These values are configured for the container environment
+          // and should not be modified
+          "PYTHONPATH": "/home/curation/project/curation/curation_venv/lib/python3.7/site-packages",
+          "GOOGLE_APPLICATION_CREDENTIALS": "/home/curation/project/curation/aou-res-curation-test.json",
+          "APPLICATION_ID": "aou-res-curation-test",
+          "GOOGLE_CLOUD_PROJECT": "aou-res-curation-test",
+          "VOCABULARY_DATASET": "vocabulary20201008",
+          // These values are for you to configure
+          "GH_USERNAME": "<GITHUB_USERNAME>",
+          "USERNAME": "<FIRST_INITIAL_LASTNAME>",
+          "DRC_BUCKET_NAME": "<YOUR_NAME>_drc",
+          "BUCKET_NAME_FAKE": "<YOUR_NAME>_fake",
+          "BUCKET_NAME_NYC": "<YOUR_NAME>_nyc",
+          "BUCKET_NAME_PITT": "<YOUR_NAME>_pitt",
+          "BUCKET_NAME_CHS": "<YOUR_NAME>_chs",
+          "BUCKET_NAME_UNIONED_EHR": "<YOUR_NAME>_drc",
+          "BIGQUERY_DATASET_ID": "<YOUR_NAME>_ehr",
+          "RDR_DATASET_ID": "<YOUR_NAME>_rdr",
+          "COMBINED_DATASET_ID": "<YOUR_NAME>_combined",
+          "UNIONED_DATASET_ID": "<YOUR_NAME>_unioned",
+          "COMBINED_DEID_DATASET_ID": "<YOUR_NAME>_deid"
+        }
+      }
+    },
+    {
+      "label": "docker-build",
+      "type": "docker-build",
+      "dockerBuild": {
+        "context": "${workspaceFolder}",
+        "dockerfile": "${workspaceFolder}/docker/develop/Dockerfile",
+        "tag": "curation-dev",
+        "buildArgs": {
+          "UID": "1000",
+          "GID": "100",
+          "GSDK_VERSION": "364.0.0",
+          "GSDK_CHECKSUM": "9491beb0ae3a7f95aad5f9c7ba1b3776e496dfb7e8d629afdff582a671303045",
+          "CIRCLECI_CLI_VERSION": "0.1.16225",
+          "CIRCLECI_CLI_CHECKSUM": "0c92d2789d6f27aa1b69e465678ebd1de9e07d3ad5e7dde4f06d7e88ba643f1f"
+        },
+      },
+    }
+  ]
+}
