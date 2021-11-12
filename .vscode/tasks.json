@@ -43,14 +43,14 @@
           },
           {
             "localPath": "${GOOGLE_APPLICATION_CREDENTIALS}",
-            "containerPath": "/home/curation/project/curation/aou-res-curation-test.json"
+            "containerPath": "/home/curation/secrets/aou-res-curation-test.json"
           }
         ],
         "env": {
           // These values are configured for the container environment
           // and should not be modified
           "PYTHONPATH": "/home/curation/project/curation/curation_venv/lib/python3.7/site-packages",
-          "GOOGLE_APPLICATION_CREDENTIALS": "/home/curation/project/curation/aou-res-curation-test.json",
+          "GOOGLE_APPLICATION_CREDENTIALS": "/home/curation/secrets/aou-res-curation-test.json",
           "APPLICATION_ID": "aou-res-curation-test",
           "GOOGLE_CLOUD_PROJECT": "aou-res-curation-test",
           "VOCABULARY_DATASET": "vocabulary20201008",
