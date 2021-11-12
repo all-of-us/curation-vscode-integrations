@@ -43,7 +43,8 @@
           },
           {
             "localPath": "${GOOGLE_APPLICATION_CREDENTIALS}",
-            "containerPath": "/home/curation/secrets/aou-res-curation-test.json"
+            "containerPath": "/home/curation/secrets/aou-res-curation-test.json",
+            "permissions": "ro"
           }
         ],
         "env": {
