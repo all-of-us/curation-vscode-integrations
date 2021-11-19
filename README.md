@@ -1,7 +1,7 @@
 # CURATION-VSCODE-INTEGRATIONS
 These dots provide project code integration with VS Code post DC-1820.
 
-1) `.env` - defines the environmental variables for running tests.  Currently tests are run within the host's virtual env.  This is a vscode limitation.
+1) `.env` - defines the environmental variables for running tests.  Currently tests are run within the host's virtual env.  This is a vscode limitation.  Also, tests can be run using DC-1820 curation.sh script (or the powershell equiv.)
 
 2) `.vscode` contains the `launch.json` and `tasks.json` files for running curation in docker.  Furthermore, `settings.json` defines the configuration for running python tests (discovery, execution, and debugging)
 
