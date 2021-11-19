@@ -4,6 +4,8 @@
     {
       "type": "docker-run",
       "label": "docker-run: debug",
+      // You can comment this out once you have a docker image built or
+      // no longer wish to build the image each run.
       "dependsOn": [
         "docker-build"
       ],
@@ -14,13 +16,9 @@
         "file": "/home/curation/project/curation/data_steward/main.py",
       },
       "dockerRun": {
-        "containerName": "curation-dev",
+        "containerName": "curation-vscode",
+        "image": "curation:develop-18.04",
         "volumes": [
-          {
-            "localPath": "${workspaceFolder}/.git",
-            "containerPath": "/home/curation/project/curation/.git",
-            "permissions": "rw"
-          },
           {
             "localPath": "${workspaceFolder}/data_steward",
             "containerPath": "/home/curation/project/curation/data_steward",
@@ -78,7 +76,7 @@
       "dockerBuild": {
         "context": "${workspaceFolder}",
         "dockerfile": "${workspaceFolder}/docker/develop/Dockerfile",
-        "tag": "curation-dev",
+        "tag": "curation:develop-18.04",
         "buildArgs": {
           "UID": "1000",
           "GID": "100",
