@@ -7,7 +7,7 @@
       // You can comment this out once you have a docker image built or
       // no longer wish to build the image each run.
       "dependsOn": [
-        "docker-build"
+        "curation-build"
       ],
       "python": {
         // Define your entrypoint here
@@ -71,7 +71,7 @@
       }
     },
     {
-      "label": "docker-build",
+      "label": "curation-build",
       "type": "docker-build",
       "dockerBuild": {
         "context": "${workspaceFolder}",
